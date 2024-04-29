@@ -17,9 +17,9 @@ public class Login extends JFrame {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                // Load the background image
+             
                 ImageIcon backgroundImage = new ImageIcon("bgg.jpg");
-                // Draw the background image
+          
                 g.drawImage(backgroundImage.getImage(), 0, 0, getWidth(), getHeight(), this);
             }
         };
@@ -81,22 +81,21 @@ public class Login extends JFrame {
                     String Password = "";
 
                     try {
-                        // 1. Load the database driver
+                       
                         Class.forName("com.mysql.cj.jdbc.Driver");
 
-                        // 2. Establish a connection
+          
                         Connection connection = DriverManager.getConnection(url, UserName, Password);
 
                         String uname = userIdField.getText();
                         String pas = passwordField.getText();
 
-                        // SQL statement to check user credentials
+            
                         String query = "SELECT * FROM userdata WHERE username = ? AND password = ?";
                         PreparedStatement preparedStatement = connection.prepareStatement(query);
                         preparedStatement.setString(1, uname);
                         preparedStatement.setString(2, pas);
 
-                        // Execute the query
                         ResultSet resultSet = preparedStatement.executeQuery();
                         if (resultSet.next()) {
                             dispose();
@@ -115,7 +114,7 @@ public class Login extends JFrame {
                             System.out.println("Invalid username or password. Please try again." + uname + "::" + pas);
                         }
 
-                        // Close resources
+                    
                         resultSet.close();
                         preparedStatement.close();
                         connection.close();
